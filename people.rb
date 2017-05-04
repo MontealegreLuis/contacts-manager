@@ -2,19 +2,19 @@
 
 require 'rubygems'
 require 'sqlite3'
+require_relative 'lib/People'
 
-$db = SQLite3::Database.new('dbfile.sq3')
-$db.results_as_hash = true
+Person = Struct.new(:name, :job, :gender, :age)
 
-def disconnect_and_quit
-    $db.close
+def disconnect_and_quit(connection)
+    connection.close
     puts 'Bye!'
     exit
 end
 
-def create_table
+def create_table(connection)
     puts 'Creating people table'
-    $db.execute %{
+    connection.execute %{
         CREATE TABLE people (
             id INTEGER PRIMARY KEY,
             name VARCHAR(50),
@@ -25,23 +25,24 @@ def create_table
     }
 end
 
-def add_person
+def add_person(people)
+    person = Person.new
     puts 'Enter name'
-    name = gets.chomp
+    person.name = gets.chomp
     puts 'Enter job'
-    job = gets.chomp
+    person.job = gets.chomp
     puts 'Enter gender'
-    gender = gets.chomp
+    person.gender = gets.chomp
     puts 'Enter age'
-    age = gets.chomp
-    $db.execute('INSERT INTO people (name, job, gender, age) VALUES (?, ?, ?, ?)', name, job, gender, age)
+    person.age = gets.chomp
+    people.add(person)
 end
 
-def find_person
-    puts 'Enter name or ID of person to find:'
-    id = gets.chomp
+def find_person(people)
+    puts 'Enter name of the person to find:'
+    name = gets.chomp
 
-    person = $db.execute('SELECT * FROM people WHERE name = ? OR id = ?', id, id.to_i).first
+    person = people.named(name)
 
     unless person
         puts 'No result found'
@@ -55,6 +56,11 @@ Age: #{person['age']}}
 end
 
 def main
+    connection = SQLite3::Database.new('dbfile.sq3')
+    connection.results_as_hash = true
+
+    people = People.new(connection)
+
     loop do
         puts %q{Please select an option:
 1. Create people table
@@ -63,14 +69,14 @@ def main
 4. Quit}
 
         case gets.chomp
-        when '1'
-            create_table
-        when '2'
-            add_person
-        when '3'
-            find_person
-        when '4'
-            disconnect_and_quit
+            when '1'
+                create_table(connection)
+            when '2'
+                add_person(people)
+            when '3'
+                find_person(people)
+            when '4'
+                disconnect_and_quit(connection)
         end
     end
 end
