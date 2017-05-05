@@ -10,7 +10,6 @@ Person = Struct.new(:name, :job, :gender, :age)
 def disconnect_and_quit(connection, console)
     connection.close
     console.print('Bye!')
-    exit
 end
 
 def create_table(connection, console)
@@ -75,6 +74,7 @@ def main
                 find_person(people, console)
             when '4'
                 disconnect_and_quit(connection, console)
+                break;
         end
     end
 end
