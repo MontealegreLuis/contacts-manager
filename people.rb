@@ -2,10 +2,10 @@
 
 require 'rubygems'
 require 'sqlite3'
-require_relative 'lib/People'
-require_relative 'lib/Console'
-require_relative 'lib/SearchPersonByName'
-require_relative 'lib/AddPerson'
+require_relative 'lib/people'
+require_relative 'lib/console'
+require_relative 'lib/search_person_by_name'
+require_relative 'lib/add_person'
 
 Person = Struct.new(:name, :job, :gender, :age)
 
