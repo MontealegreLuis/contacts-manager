@@ -9,21 +9,8 @@ require_relative 'lib/add_person'
 
 Person = Struct.new(:name, :job, :gender, :age)
 
-def create_table(connection, console)
-    console.print('Creating people table')
-    connection.execute %{
-        CREATE TABLE people (
-            id INTEGER PRIMARY KEY,
-            name VARCHAR(50),
-            job VARCHAR(50),
-            gender VARCHAR(6),
-            age INTEGR
-        )
-    }
-end
-
 def main
-    connection = SQLite3::Database.new('dbfile.sq3')
+    connection = SQLite3::Database.new('database.sq3')
     connection.results_as_hash = true
 
     people = People.new(connection)
@@ -33,19 +20,16 @@ def main
 
     loop do
         option = console.prompt(%q{Please select an option:
-1. Create people table
-2. Add a person
-3. Look for a person
-4. Quit})
+1. Add a person
+2. Look for a person
+3. Quit})
 
         case option
             when '1'
-                create_table(connection, console)
-            when '2'
                 add_person.execute
-            when '3'
+            when '2'
                 search_by_name.execute
-            when '4'
+            when '3'
                 console.print('bye!')
                 break;
         end
