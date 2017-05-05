@@ -41,7 +41,7 @@ def find_person(people, console)
     person = people.named(name)
 
     unless person
-        puts 'No result found'
+        console.print('No result found')
         return
     end
 
