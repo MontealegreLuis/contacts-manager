@@ -9,11 +9,6 @@ require_relative 'lib/AddPerson'
 
 Person = Struct.new(:name, :job, :gender, :age)
 
-def disconnect_and_quit(connection, console)
-    connection.close
-    console.print('Bye!')
-end
-
 def create_table(connection, console)
     console.print('Creating people table')
     connection.execute %{
@@ -51,10 +46,11 @@ def main
             when '3'
                 search_by_name.execute
             when '4'
-                disconnect_and_quit(connection, console)
+                console.print('bye!')
                 break;
         end
     end
+    connection.close
 end
 
 main
