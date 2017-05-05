@@ -5,6 +5,7 @@ require 'sqlite3'
 require_relative 'lib/People'
 require_relative 'lib/Console'
 require_relative 'lib/SearchPersonByName'
+require_relative 'lib/AddPerson'
 
 Person = Struct.new(:name, :job, :gender, :age)
 
@@ -26,15 +27,6 @@ def create_table(connection, console)
     }
 end
 
-def add_person(people, console)
-    person = Person.new
-    person.name = console.prompt('Enter name')
-    person.job = console.prompt('Enter job')
-    person.gender = console.prompt('Enter gender')
-    person.age = console.prompt('Enter age')
-    people.add(person)
-end
-
 def main
     connection = SQLite3::Database.new('dbfile.sq3')
     connection.results_as_hash = true
@@ -42,6 +34,7 @@ def main
     people = People.new(connection)
     console = Console.new
     search_by_name = SearchPersonByName.new(console, people)
+    add_person = AddPerson.new(console, people)
 
     loop do
         option = console.prompt(%q{Please select an option:
@@ -54,7 +47,7 @@ def main
             when '1'
                 create_table(connection, console)
             when '2'
-                add_person(people, console)
+                add_person.execute
             when '3'
                 search_by_name.execute
             when '4'
