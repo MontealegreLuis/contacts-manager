@@ -4,6 +4,7 @@ require 'rubygems'
 require 'sqlite3'
 require_relative 'lib/People'
 require_relative 'lib/Console'
+require_relative 'lib/SearchPersonByName'
 
 Person = Struct.new(:name, :job, :gender, :age)
 
@@ -34,29 +35,13 @@ def add_person(people, console)
     people.add(person)
 end
 
-def find_person(people, console)
-    name = console.prompt('Enter name of the person to find')
-
-    person = people.named(name)
-
-    unless person
-        console.print('No result found')
-        return
-    end
-
-    console.print(%Q{Name: #{person['name']}
-Job: #{person['job']}
-Gender: #{person['gender']}
-Age: #{person['age']}})
-
-end
-
 def main
     connection = SQLite3::Database.new('dbfile.sq3')
     connection.results_as_hash = true
 
     people = People.new(connection)
     console = Console.new
+    search_by_name = SearchPersonByName.new(console, people)
 
     loop do
         option = console.prompt(%q{Please select an option:
@@ -71,7 +56,7 @@ def main
             when '2'
                 add_person(people, console)
             when '3'
-                find_person(people, console)
+                search_by_name.execute
             when '4'
                 disconnect_and_quit(connection, console)
                 break;
