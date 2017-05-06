@@ -15,13 +15,11 @@ class Menu
 
             option = select_option
 
-            if (option  == @actions.length + 1)
-                @console.print('Bye!')
-                break
-            end
+            break if (option  == @actions.length + 1)
 
             @actions[option - 1].execute
         end
+        @console.print('Bye!')
     end
 
     private
