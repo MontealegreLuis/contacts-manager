@@ -12,12 +12,9 @@ class Menu
     def run
         loop do
             show_menu
-
             option = select_option
-
             break if exit?(option)
-
-            @actions[option - 1].execute
+            execute_selected(option)
         end
         @console.print('Bye!')
     end
@@ -38,6 +35,10 @@ class Menu
 
     def exit?(option)
         option == @actions.length + 1
+    end
+
+    def execute_selected(option)
+        @actions[option - 1].execute
     end
 end
 
