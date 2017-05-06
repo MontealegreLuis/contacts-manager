@@ -4,6 +4,7 @@ require 'rubygems'
 require 'sqlite3'
 require_relative 'lib/people'
 require_relative 'lib/console'
+require_relative 'lib/menu'
 require_relative 'lib/search_person_by_name'
 require_relative 'lib/add_person'
 
@@ -15,25 +16,13 @@ def main
 
     people = People.new(connection)
     console = Console.new
-    search_by_name = SearchPersonByName.new(console, people)
-    add_person = AddPerson.new(console, people)
 
-    loop do
-        option = console.prompt(%q{Please select an option:
-1. Add a person
-2. Look for a person
-3. Quit})
+    menu = Menu.new(console, 'Please select an option')
+    menu.add_action(SearchPersonByName.new('Look for a person', console, people))
+    menu.add_action(AddPerson.new('Add a person', console, people))
 
-        case option
-            when '1'
-                add_person.execute
-            when '2'
-                search_by_name.execute
-            when '3'
-                console.print('bye!')
-                break;
-        end
-    end
+    menu.run
+
     connection.close
 end
 

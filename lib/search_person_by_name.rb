@@ -1,5 +1,8 @@
 class SearchPersonByName
-    def initialize(console, people)
+    attr_accessor :label
+
+    def initialize(label, console, people)
+        @label = label
         @console = console
         @people = people
     end

@@ -1,5 +1,8 @@
 class AddPerson
-    def initialize(console, people)
+    attr_accessor :label
+
+    def initialize(label, console, people)
+        @label = label
         @people = people
         @console = console
     end
