@@ -15,7 +15,7 @@ class Menu
 
             option = select_option
 
-            break if (option  == @actions.length + 1)
+            break if exit?(option)
 
             @actions[option - 1].execute
         end
@@ -34,6 +34,10 @@ class Menu
 
     def select_option
         @console.prompt("Select an option (1-#{@actions.length + 1})").to_i
+    end
+
+    def exit?(option)
+        option == @actions.length + 1
     end
 end
 
