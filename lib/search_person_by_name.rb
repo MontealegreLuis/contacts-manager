@@ -17,9 +17,6 @@ class SearchPersonByName
             return
         end
 
-        @console.print(%Q{Name: #{person['name']}
-Job: #{person['job']}
-Gender: #{person['gender']}
-Age: #{person['age']}})
+        @console.print(person.format)
     end
 end

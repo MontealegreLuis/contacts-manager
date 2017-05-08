@@ -2,13 +2,12 @@
 
 require 'rubygems'
 require 'sqlite3'
+require_relative 'lib/person'
 require_relative 'lib/people'
 require_relative 'lib/console'
 require_relative 'lib/menu'
 require_relative 'lib/search_person_by_name'
 require_relative 'lib/add_person'
-
-Person = Struct.new(:name, :job, :gender, :age)
 
 def main
     connection = SQLite3::Database.new('database.sq3')

@@ -14,7 +14,8 @@ class People
     end
 
     def named(name)
-        @connection.execute('SELECT * FROM people WHERE name = ?', name).first
+        row = @connection.execute('SELECT * FROM people WHERE name = ?', name).first
+        row == nil ? nil : Person.from_storage(row)
     end
 end
 
