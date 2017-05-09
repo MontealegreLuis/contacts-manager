@@ -12,10 +12,7 @@ class Person
     end
 
     def format
-        %Q{Name: #{@name}
-Job: #{@job}
-Gender: #{@gender}
-Age: #{@age}}
+        %Q{** Name: #{@name} | Job: #{@job} | Gender: #{@gender} | Age: #{@age}}
     end
 end
 
