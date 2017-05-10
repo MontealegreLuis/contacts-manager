@@ -1,12 +1,4 @@
-class AddPerson
-    attr_accessor :label
-
-    def initialize(label, console, people)
-        @label = label
-        @people = people
-        @console = console
-    end
-
+class AddPerson < Action
     def execute
         person = Person.new
         person.name = @console.prompt('Enter name')

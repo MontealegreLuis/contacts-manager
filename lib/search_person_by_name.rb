@@ -1,12 +1,4 @@
-class SearchPersonByName
-    attr_accessor :label
-
-    def initialize(label, console, people)
-        @label = label
-        @console = console
-        @people = people
-    end
-
+class SearchPersonByName < Action
     def execute()
         name = @console.prompt('Enter name of the person to find')
 
