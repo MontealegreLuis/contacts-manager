@@ -9,6 +9,7 @@ require_relative 'lib/menu'
 require_relative 'lib/search_person_by_name'
 require_relative 'lib/add_person'
 require_relative 'lib/show_all_people'
+require_relative 'lib/remove_person'
 
 def main
     connection = SQLite3::Database.new('database.sq3')
@@ -21,6 +22,7 @@ def main
     menu.add_action(ShowAllPeople.new('Show all', console, people))
     menu.add_action(SearchPersonByName.new('Look for a person', console, people))
     menu.add_action(AddPerson.new('Add a person', console, people))
+    menu.add_action(RemovePerson.new('Remove a person', console, people))
 
     menu.run
 

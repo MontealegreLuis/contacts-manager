@@ -24,5 +24,9 @@ class People
         row = @connection.execute('SELECT * FROM people WHERE name = ?', name).first
         row == nil ? nil : Person.from_storage(row)
     end
+
+    def remove(person)
+        @connection.execute('DELETE FROM people WHERE id = ?', person.id)
+    end
 end
 
