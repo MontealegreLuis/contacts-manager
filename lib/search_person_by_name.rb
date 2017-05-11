@@ -1,14 +1,11 @@
 class SearchPersonByName < Action
     def execute()
-        name = @console.prompt('Enter name of the person to find')
-
-        person = @people.named(name)
-
-        unless person
-            @console.print('No result found')
-            return
+        begin
+            name = @console.prompt('Enter name of the person to find')
+            person = @people.named(name)
+            @console.print(person.format)
+        rescue UnknownPerson
+            @console.print("Cannot find person named #{name}")
         end
-
-        @console.print(person.format)
     end
 end

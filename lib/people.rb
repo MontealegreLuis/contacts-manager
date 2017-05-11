@@ -22,7 +22,10 @@ class People
 
     def named(name)
         row = @connection.execute('SELECT * FROM people WHERE name = ?', name).first
-        row == nil ? nil : Person.from_storage(row)
+
+        raise UnknownPerson if row == nil
+
+        Person.from_storage(row)
     end
 
     def remove(person)

@@ -1,0 +1,3 @@
+class UnknownPerson < StandardError
+end
+
