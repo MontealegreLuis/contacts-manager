@@ -15,6 +15,6 @@ $ sqlite3 database.sq3 < data/table.sql
 Run the following command from your terminal
 
 ```bash
-$ ruby people.rb
+$ ruby application.rb
 ```
 
