@@ -11,7 +11,7 @@ class Person
     end
 
     def self.from_storage(data)
-        person = Person.new
+        person = self.new
         person.id = data['id']
         person.name = data['name']
         person.job = data['job']
