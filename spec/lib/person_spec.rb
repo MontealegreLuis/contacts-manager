@@ -27,7 +27,7 @@ describe Person do
         expect(person.age).to be(37)
     end
 
-    it 'can has a string representation' do
+    it 'has a string representation' do
         person = Person.register('Luis', 'Instructor', 'M', 37)
 
         format = person.format
