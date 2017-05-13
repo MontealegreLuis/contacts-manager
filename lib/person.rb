@@ -10,13 +10,13 @@ class Person
         person
     end
 
-    def self.from_storage(data)
+    def self.from(stored_data)
         person = self.new
-        person.id = data['id']
-        person.name = data['name']
-        person.job = data['job']
-        person.gender = data['gender']
-        person.age = data['age']
+        person.id = stored_data['id']
+        person.name = stored_data['name']
+        person.job = stored_data['job']
+        person.gender = stored_data['gender']
+        person.age = stored_data['age']
         person
     end
 

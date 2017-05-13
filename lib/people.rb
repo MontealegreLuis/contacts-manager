@@ -16,7 +16,7 @@ class People
     def all
         rows = @connection.execute('SELECT * FROM people')
         people = []
-        rows.each { |row| people << Person.from_storage(row) }
+        rows.each { |row| people << Person.from(row) }
         people
     end
 
@@ -25,7 +25,7 @@ class People
 
         raise UnknownPerson if row == nil
 
-        Person.from_storage(row)
+        Person.from(row)
     end
 
     def remove(person)
