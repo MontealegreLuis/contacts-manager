@@ -26,13 +26,7 @@ $ ruby application.rb
 
 ## Tests
 
-To run the tests, you'll need a different database.
-
-```bash
-$ sqlite3 database_test.sq3 < data/table.sql
-```
-
-You're now ready to run specs.
+To run the specs execute the following command:
 
 ```bash
 $ rspec --format documentation
