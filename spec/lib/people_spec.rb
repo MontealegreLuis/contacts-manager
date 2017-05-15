@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'sqlite3'
+require 'unknown_person'
 require 'person'
 require 'people'
 
@@ -16,6 +17,10 @@ describe People do
         @people.add(person)
 
         expect(@people.named("John").name).to eq("John")
+    end
+
+    it 'does not find an unknown person' do
+        expect{ @people.named("Luis") }.to raise_error(UnknownPerson)
     end
 end
 
