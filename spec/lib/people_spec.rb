@@ -22,13 +22,31 @@ CREATE TABLE people (
 
     it 'finds a registered person' do
         person = build(:person)
-
         @people.add(person)
 
         expect(@people.named("John").name).to eq("John")
     end
 
     it 'does not find an unknown person' do
+        expect{ @people.named("John") }.to raise_error(UnknownPerson)
+    end
+
+    it 'finds all the registered people' do
+       expect(@people.all.size).to be(0)
+       
+       people = build_list(:person, 4)
+       people.each { |person| @people.add(person) }
+
+       expect(@people.all.size).to be(4)
+    end
+
+    it 'removes a registered person' do
+        person = build(:person)
+        @people.add(person)
+        person_to_remove = @people.named("John")
+
+        @people.remove(person_to_remove)
+
         expect{ @people.named("John") }.to raise_error(UnknownPerson)
     end
 end
