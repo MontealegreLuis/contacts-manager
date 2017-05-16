@@ -1,5 +1,7 @@
 # Contacts manager
 
+[![Build Status](https://travis-ci.org/MontealegreLuis/contacts-manager.svg?branch=master)](https://travis-ci.org/MontealegreLuis/contacts-manager)
+
 Command line application written in Ruby +  SQLite.
 
 ## Setup
