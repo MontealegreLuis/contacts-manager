@@ -36,6 +36,7 @@ PLATFORMS
 DEPENDENCIES
   factory_girl
   rspec
+  rspec-mocks
   sqlite3
 
 BUNDLED WITH
