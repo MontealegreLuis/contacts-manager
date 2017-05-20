@@ -1,4 +1,4 @@
-class AddPerson < Action
+class RegisterPerson < Action
     def execute
         person = Person.register(
             @console.prompt('Enter name'),

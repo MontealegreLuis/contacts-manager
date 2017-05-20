@@ -1,13 +1,13 @@
 require 'spec_helper'
 require 'action'
 require 'person'
-require 'add_person'
+require 'register_person'
 
-describe AddPerson do
+describe RegisterPerson do
     before :each do
         @console = double('console')
         @people = double('people')
-        @action = AddPerson.new('Register a person', @console, @people)
+        @action = RegisterPerson.new('Register a person', @console, @people)
    end
 
     it 'registers a new person' do
