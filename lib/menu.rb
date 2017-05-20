@@ -34,7 +34,7 @@ class Menu
     end
 
     def exit?(option)
-        option == @actions.length + 1
+        option > @actions.length
     end
 
     def execute_selected(option)
