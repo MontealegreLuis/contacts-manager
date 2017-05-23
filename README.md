@@ -16,7 +16,7 @@ $ sqlite3 database.sq3 < data/table.sql
 Install the application dependencies.
 
 ```bash
-$ bundle install
+$ bundle install --path .bundle
 ```
 
 ## Usage
@@ -32,6 +32,5 @@ $ ruby application.rb
 To run the specs execute the following command:
 
 ```bash
-$ rspec --format documentation
+$ bundle exec rspec --format documentation
 ```
-
